@@ -1,0 +1,12 @@
+#!/bin/csh -f
+switch ($HOSTTYPE)
+case 'x86_64-linux':
+ ImageSegment/IS_VBGMM-cent $*
+ breaksw
+case 'FreeBSD':
+ ImageSegment/IS_VBGMM-bsd $*
+ breaksw
+case 'aarch64-linux':
+ ImageSegment/IS_VBGMM-zynq $*
+ breaksw
+endsw

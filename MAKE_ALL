@@ -1,0 +1,189 @@
+#!/bin/csh
+
+set HOST_CENT=cad101
+set HOST_UBUNTU=arch07
+set HOST_FGKU=cadpc01
+set HOST_ZYNQ=arch28
+set HOST_ACAP=alice122
+
+#(cd 4dimage;      ./MAKE_BSD)
+#(cd Kdijkstra;    ./MAKE_BSD)
+#(cd dijkstra;     ./MAKE_BSD)
+
+#####################################################stanford
+ (cd stanford;                                           ./MAKE_BSD)
+
+#####################################################conv16
+ (cd conv16;                                             ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/conv16/{M*,*.[ch],*obj})
+
+#####################################################filter
+ (cd filter;                                             ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/filter/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/filter;      ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/filter/filter-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/filter;      ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/filter/filter-zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/filter;      ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/filter/filter-acap*)
+ (cd;sget proj-arm64/sample/filter/*obj)
+
+#####################################################mm_cnn_lf
+ (cd mm_cnn_lf;                                          ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/mm_cnn_lf/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/mm_cnn_lf;   ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/mm_cnn_lf/[a-z]*cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/mm_cnn_lf;   ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/mm_cnn_lf/[a-z]*zynq*)
+ (cd;sget proj-arm64/sample/mm_cnn_lf/[a-z]*vmk180*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/mm_cnn_lf;   ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/mm_cnn_lf/[a-z]*acap*)
+ (cd;sget proj-arm64/sample/mm_cnn_lf/*obj)
+
+#####################################################stencil
+ (cd stencil;                                            ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/stencil/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/stencil;     ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/stencil/stencil-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/stencil;     ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/stencil/stencil-zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/stencil;     ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/stencil/stencil-acap*)
+ (cd;sget proj-arm64/sample/stencil/*obj)
+
+#####################################################stringsearch
+ (cd stringsearch;                                       ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/stringsearch/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/stringsearch;./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/stringsearch/search-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/stringsearch;./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/stringsearch/search-zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/stringsearch;./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/stringsearch/search-acap*)
+ (cd;sget proj-arm64/sample/stringsearch/*obj)
+
+#####################################################test
+ (cd test;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/test/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/test;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/test/test*cent*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/test;        ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/test/test*fugaku*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/test;        ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/test/test*zynq*)
+ (cd;sget proj-arm64/sample/test/test*vmk180*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/test;        ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/test/test*acap*)
+ (cd;sget proj-arm64/sample/test/*obj)
+
+#####################################################spgemm
+ (cd spgemm;                                             ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/spgemm/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/spgemm;      ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/spgemm/test*cent*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/spgemm;      ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/spgemm/test*fugaku*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/spgemm;      ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/spgemm/test*zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/spgemm;      ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/spgemm/test*acap*)
+ (cd;sget proj-arm64/sample/spgemm/*obj)
+
+#####################################################crypto
+ (cd crypto;                                             ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/crypto/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/crypto;      ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/crypto/sha256-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/crypto;      ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/crypto/sha256-zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/crypto;      ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/crypto/sha256-acap*)
+ (cd;sget proj-arm64/sample/crypto/*obj)
+
+#####################################################fft
+ (cd fft;                                                ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/fft/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/fft;         ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/fft/fft-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/fft;         ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/fft/fft-zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/fft;         ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/fft/fft-acap*)
+ (cd;sget proj-arm64/sample/fft/*obj)
+
+#####################################################sort
+ (cd sort;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/sort/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/sort;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/sort/sort*cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/sort;        ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/sort/sort*zynq*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/sort;        ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/sort/sort*acap*)
+ (cd;sget proj-arm64/sample/sort/*obj)
+
+#####################################################tricount8
+ (cd tricount8;                                          ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/tricount8/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/tricount8;   ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/tricount8/tricount-cent*)
+ (cd;sget proj-arm64/sample/tricount8/*obj)
+
+#####################################################tricount9
+ (cd tricount9;                                          ./MAKE_BSD)
+
+#####################################################rsim
+ (cd rsim;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/rsim/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/rsim;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/rsim/rsim-cent*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/rsim;        ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/rsim/rsim-zynq*)
+ (cd;sget proj-arm64/sample/rsim/*obj)
+
+#####################################################ssim
+ (cd ssim;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/ssim/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/ssim;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/ssim/ssim-cent*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/ssim;        ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/ssim/ssim-fugaku*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/ssim;        ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/ssim/ssim-zynq*)
+ (cd;sget proj-arm64/sample/ssim/*obj)
+
+#####################################################tsim
+ (cd tsim;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/tsim/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/tsim;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/tsim/tsim-cent*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/tsim;        ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/tsim/tsim-fugaku*)
+sssh "ssh $HOST_ZYNQ '(cd proj-arm64/sample/tsim;        ./MAKE_ZYNQ)'"
+ (cd;sget proj-arm64/sample/tsim/tsim-vmk180*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/tsim;        ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/tsim/tsim-acap*)
+ (cd;sget proj-arm64/sample/tsim/*obj)
+
+#####################################################usim
+ (cd usim;                                               ./MAKE_BSD)
+ (cd;sput proj-arm64/sample/usim/{M*,*.[ch],*obj})
+sssh "ssh $HOST_CENT '(cd proj-arm64/sample/usim;        ./MAKE_CENT)'"
+ (cd;sget proj-arm64/sample/usim/usim-cent*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/usim;        ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/usim/usim-fugaku*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/usim;        ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/usim/usim-acap*)
+ (cd;sget proj-arm64/sample/usim/*obj)
+
+#####################################################vsim
+ (cd;sput proj-arm64/sample/vsim/{M*,*.[ch]})
+sssh "ssh $HOST_UBUNTU '(cd proj-arm64/sample/vsim;      ./MAKE_UBUNTU)'"
+ (cd;sget proj-arm64/sample/vsim/vsim-ubuntu*)
+sssh "ssh $HOST_FGKU '(cd proj-arm64/sample/vsim;        ./MAKE_FUGAKU)'"
+ (cd;sget proj-arm64/sample/vsim/vsim-fugaku*)
+sssh "ssh $HOST_ACAP '(cd proj-arm64/sample/vsim;        ./MAKE_ACAP)'"
+ (cd;sget proj-arm64/sample/vsim/vsim-acap*)
+ (cd;sget proj-arm64/sample/vsim/*obj)
+
+#--------------------------------------------------------

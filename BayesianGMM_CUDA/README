@@ -1,0 +1,4 @@
+# GPGPU Implementaion of Variational Bayesian Gaussian Mixture Model
+
+Gaussian Mixture Model using Variational Bayesian Model. It can get
+optimized number of clusters by one execution.

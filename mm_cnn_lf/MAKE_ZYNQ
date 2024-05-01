@@ -1,0 +1,4 @@
+make -f Makefile-zynq.emax6nc    all clean
+make -f Makefile-zynq.emax6      all clean
+make -f Makefile-zynq.emax6+dma  all clean
+make -f Makefile-vmk180.emax7+dma  all clean

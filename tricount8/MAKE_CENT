@@ -1,0 +1,4 @@
+make -f Makefile-cent		all clean
+make -f Makefile-cent.pth	all clean
+make -f Makefile-cent.emax5nc	all clean
+make -f Makefile-cent.emax6nc	all clean

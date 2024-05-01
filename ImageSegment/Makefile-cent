@@ -1,0 +1,26 @@
+## Primary writer: Hiroki Nishimoto ##
+## nishimoto.hiroki.na7@is.naist.jp ##
+
+PROGRAM		= ./IS_VBGMM-cent
+OBJS		= IS_VBGMM.o gemm.o xdisp.o
+SRCS		= ($(OBJS:.o=.c))
+HEADERS		= 
+
+CC		= gcc -std=c99
+CP		= g++
+CFLAGS		= -O2 -Wall -Wextra -Winit-self -Wno-missing-field-initializers -I/usr/local/include -I/usr/include/openblas -DCBLAS_GEMM
+LDFLAGS = -L/usr/lib64 -L/usr/local/lib -L/usr/lib64/atlas -lm -lrt -lopenblas -lX11
+#OPT = -funroll-loops
+LIBS		= -lm -lX11
+
+all:		$(PROGRAM)
+
+$(PROGRAM):	$(OBJS)
+		$(CC) $(OBJS) -o $(PROGRAM) $(CFLAGS) $(LDFLAGS) $(LIBS)
+
+.c.o:		$(HEADERS)
+		$(CC) $(CFLAGS) $(LDFLAGS) -c $<
+
+clean:;		rm -f *.o *.so *.gmon core *~
+
+##

@@ -1,0 +1,20 @@
+make C++ VBGMM that fit HLS.
+
+## How to use
+1. set parameter in setting.h
+
+| parameter | role |
+| --- | --- |
+| N | data size |
+| D | dimentionaly |
+| K | init cluster number (not final cluster) |
+| MAX\_ITER | upper bound of iteration of Variational EM |
+| TOL | threshold of converge |
+| REG\_COVOR | value for avoid Sk < 0 |
+| RANDOM\_INIT | if 1 then its means will be initialized by random value |
+| RANDOM\_SEED | seed of srand |
+| DEBUG\_PRINT | if 1 then it output values for debuging |
+| RESURT\_PRINT | if 1 then it output final values |
+| ON\_CPU | if not 1 then it make ineffective any output |
+
+$ /vbgmm [input_file_path]

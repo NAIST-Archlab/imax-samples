@@ -1,0 +1,8 @@
+test/
+image-data/
+*.pnm
+*.edges
+*.mp4
+*.ini
+*.o
+deeppose/data/

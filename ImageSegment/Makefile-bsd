@@ -1,0 +1,24 @@
+## Primary writer: Hiroki Nishimoto ##
+## nishimoto.hiroki.na7@is.naist.jp ##
+
+PROGRAM		= ./IS_VBGMM-bsd
+OBJS		= IS_VBGMM.o gemm.o xdisp.o
+SRCS		= ($(OBJS:.o=.c))
+HEADERS		= 
+
+CC		= gcc -std=c99
+CP		= g++
+CFLAGS		= -O2 -Wall -Wextra -Winit-self -Wno-missing-field-initializers -I/usr/local/include
+LIBS		= -L/usr/lib64 -L/usr/local/lib -lm -lX11
+
+all:		$(PROGRAM)
+
+$(PROGRAM):	$(OBJS)
+		$(CC) $(OBJS) -o $(PROGRAM) $(CFLAGS) $(LIBS)
+
+.c.o:		$(HEADERS)
+		$(CC) $(CFLAGS) -c $<
+
+clean:;		rm -f *.o *.so *.gmon core *~
+
+##

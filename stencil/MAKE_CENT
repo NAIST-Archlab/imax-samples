@@ -1,0 +1,2 @@
+make -f Makefile-cent		all clean
+make -f Makefile-cent.emax6nc	all clean

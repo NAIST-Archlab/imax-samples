@@ -1,0 +1,12 @@
+[submodule "tsim"]
+	path = tsim
+	url = git@github.com:NAIST-Archlab/tsim.git
+[submodule "vsim"]
+	path = vsim
+	url = git@github.com:NAIST-Archlab/vsim.git
+[submodule "rsim"]
+	path = rsim
+	url = git@github.com:NAIST-Archlab/rsim.git
+[submodule "ssim"]
+	path = ssim
+	url = git@github.com:NAIST-Archlab/ssim.git
